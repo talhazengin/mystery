@@ -17,8 +17,12 @@ func (a Astrarium) Resolve() *Path {
 		return nil
 	}
 
-	for i, link := range a.Links {
-		link.Node1.Id
+	for _, link := range a.Links {
+		possibleLinks := a.getLinks(link.Node1.Id)
+
+		for _, selectedLink := range possibleLinks {
+
+		}
 	}
 }
 
