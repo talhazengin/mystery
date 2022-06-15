@@ -7,24 +7,25 @@ import (
 
 func main() {
 
-	// // mystery 1
-	// links := []Link{
-	// 	{Node1: &Node{Id: 1}, Node2: &Node{Id: 2}},
-	// 	{Node1: &Node{Id: 1}, Node2: &Node{Id: 3}},
-	// 	{Node1: &Node{Id: 2}, Node2: &Node{Id: 4}},
-	// 	{Node1: &Node{Id: 3}, Node2: &Node{Id: 4}},
-	// 	{Node1: &Node{Id: 4}, Node2: &Node{Id: 5}},
-	// 	{Node1: &Node{Id: 7}, Node2: &Node{Id: 5}},
-	// 	{Node1: &Node{Id: 5}, Node2: &Node{Id: 6}},
-	// 	{Node1: &Node{Id: 7}, Node2: &Node{Id: 8}},
-	// 	{Node1: &Node{Id: 8}, Node2: &Node{Id: 6}},
-	// }
+	link1 := Link{Id: 1}
+	link2 := Link{Id: 2}
+	link3 := Link{Id: 3}
+	link4 := Link{Id: 4}
+	link5 := Link{Id: 5}
+	link6 := Link{Id: 6}
 
-	links := []Link{
-		{Node1: &Node{Id: 1}, Node2: &Node{Id: 2}},
-		{Node1: &Node{Id: 2}, Node2: &Node{Id: 3}},
-		{Node1: &Node{Id: 3}, Node2: &Node{Id: 1}},
+	link1.NextLinks = []*Link{&link4, &link6, &link3, &link5}
+	link2.NextLinks = []*Link{&link4, &link6}
+	link3.NextLinks = []*Link{&link5, &link1, &link6, &link4}
+	link4.NextLinks = []*Link{&link6, &link3, &link1, &link2}
+	link5.NextLinks = []*Link{&link3, &link1}
+	link6.NextLinks = []*Link{&link2, &link4, &link3, &link1}
+
+	links := []*Link{&link1, &link2, &link3, &link4, &link5, &link6}
+
+	path := astrarium.NewAstrarium(links).Resolve()
+
+	for _, l := range path {
+		print(l.Id, " ")
 	}
-
-	astrarium.NewAstrarium(links)
 }
